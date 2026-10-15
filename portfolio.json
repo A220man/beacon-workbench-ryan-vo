@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "beacon-workbench-ryan-vo",
+  "owner": "A220man",
+  "email": "ryandtvo@gmail.com",
+  "domain": "AI/ML developer tools",
+  "summary": "Work in progress: beacon-workbench-ryan-vo",
+  "workflows": [
+    "Upload Flutter project for static analysis of state reuse patterns, performance anti-patterns, and architecture issues",
+    "View analysis results with filtering by severity, category, and file; export reports as JSON or PDF",
+    "Configure LLM provider for opt-in advisory explanations grounded in actual code findings"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "status": "work-in-progress"
+}
