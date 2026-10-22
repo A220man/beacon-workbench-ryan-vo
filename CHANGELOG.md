@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.0.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
@@ -33,6 +37,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Nginx reverse proxy config for frontend
 
 ## [Unreleased]
+
+### Added
+- **OIDC Auth Flow**: Complete authorization code flow with PKCE (login, callback, logout endpoints)
+- **Frontend Auth**: Login page, callback handler, protected routes, user session management
+- **Role-Based Access**: Backend dependency injection for viewer/operator/admin roles
+- **Token Validation**: JWKS fetch with caching, issuer/audience verification
 
 ### Planned
 - Flutter project analysis engine (static AST parsing, pattern detection)
