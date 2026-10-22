@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { Dashboard } from "@/pages/Dashboard";
+import { Login } from "@/pages/Login";
+import { Callback } from "@/pages/Callback";
 
 function NotFound() {
   return (
@@ -19,6 +21,8 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/callback" element={<Callback />} />
         <Route path="/analysis" element={<div className="text-center py-12 text-muted">Analysis Workflow - Coming Soon</div>} />
         <Route path="/settings" element={<div className="text-center py-12 text-muted">Settings - Coming Soon</div>} />
         <Route path="*" element={<NotFound />} />
