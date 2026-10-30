@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.1.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
@@ -36,6 +40,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .dockerignore files for both services
 - Nginx reverse proxy config for frontend
 
+### Fixed
+- **Health Check Accuracy**: Basic `/health` endpoint now verifies database connectivity instead of returning a hardcoded "connected" status. Added tests for degraded state when database is unavailable.
+
+### Added
+- Tests for health endpoint degraded state (`test_health_check_degraded_on_db_failure`, `test_detailed_health_check_degraded_on_db_failure`)
 ## [Unreleased]
 
 ### Added
