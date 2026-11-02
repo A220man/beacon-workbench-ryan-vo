@@ -1,3 +1,3 @@
-from app.api.routes import auth, health
+from app.api.routes import analysis, auth, health
 
-__all__ = ["auth", "health"]
+__all__ = ["analysis", "auth", "health"]

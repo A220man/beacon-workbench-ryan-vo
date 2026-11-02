@@ -1,8 +1,10 @@
 import pytest
+from functools import lru_cache
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.pool import StaticPool
 
+from app.core.config import Settings, get_settings
 from app.core.database import Base, get_session
 from app.main import create_app
 
@@ -44,11 +46,26 @@ async def init_test_db():
 
 @pytest.fixture
 async def client():
+    # Clear the lru_cache on get_settings and override to disable OIDC for tests
+    get_settings.cache_clear()
+    
+    def test_settings():
+        s = Settings()
+        s.oidc_enabled = False
+        return s
+
+    # Override the cached function
+    import app.core.config as config_module
+    original_get_settings = config_module.get_settings
+    config_module.get_settings = lru_cache()(test_settings)
+
     app = create_app()
     app.dependency_overrides[get_session] = override_get_session
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         yield ac
     app.dependency_overrides.clear()
+    config_module.get_settings = original_get_settings
+    get_settings.cache_clear()
 
 
 @pytest.fixture
