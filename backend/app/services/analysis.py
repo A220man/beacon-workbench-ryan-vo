@@ -1,3 +1,4 @@
+
 """
 Flutter project analysis engine.
 
@@ -350,7 +351,7 @@ class FlutterProjectAnalyzer:
                 if isinstance(info, str):
                     version = info
                 elif isinstance(info, dict):
-                    version = info.get("version", info.get("path", info.get("git", "unknown")))
+                    version = info.get("version", info.get("path", info.get("git", "unknown"))) or "unknown"
                 else:
                     version = "unknown"
                 self.report.dependencies.append(DependencyInfo(name=name, version=str(version), is_dev=False))
@@ -359,7 +360,7 @@ class FlutterProjectAnalyzer:
                 if isinstance(info, str):
                     version = info
                 elif isinstance(info, dict):
-                    version = info.get("version", info.get("path", info.get("git", "unknown")))
+                    version = info.get("version", info.get("path", info.get("git", "unknown"))) or "unknown"
                 else:
                     version = "unknown"
                 self.report.dependencies.append(DependencyInfo(name=name, version=str(version), is_dev=True))
@@ -452,9 +453,6 @@ class FlutterProjectAnalyzer:
                 finding = Finding(
                     id=pattern_def["id"],
                     title=pattern_def["title"],
-                    description=pattern_def["description"],
-                    severity=pattern_def["severity"],
-                    category=pattern_def["category"],
                     file_path=rel_path,
                     line_number=line_num,
                     recommendation=pattern_def["recommendation"],
@@ -501,8 +499,8 @@ class FlutterProjectAnalyzer:
 
     def _generate_summary(self) -> None:
         """Generate analysis summary."""
-        findings_by_severity = {}
-        findings_by_category = {}
+        findings_by_severity: Dict[str, int] = {}
+        findings_by_category: Dict[str, int] = {}
 
         for finding in self.report.findings:
             findings_by_severity[finding.severity.value] = findings_by_severity.get(finding.severity.value, 0) + 1

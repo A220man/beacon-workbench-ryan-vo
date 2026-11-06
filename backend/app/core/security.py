@@ -1,5 +1,5 @@
 import time
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 import httpx
 from jose import jwt
@@ -28,7 +28,7 @@ async def fetch_jwks() -> Dict[str, Any]:
         response.raise_for_status()
         jwks = response.json()
 
-    keys = {key["kid"]: key for key in jwks.get("keys", [])}
+    keys: Dict[str, Any] = {key["kid"]: key for key in jwks.get("keys", [])}
     _jwks_cache = {"keys": keys, "fetched_at": now}
     return keys
 
@@ -72,7 +72,7 @@ async def decode_token(token: str) -> Dict[str, Any]:
         raise ValueError(f"Token validation failed: {e}")
 
 
-def extract_roles(payload: Dict[str, Any]) -> list[str]:
+def extract_roles(payload: Dict[str, Any]) -> List[str]:
     realm_access = payload.get("realm_access", {})
     return realm_access.get("roles", [])
 
