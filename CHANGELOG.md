@@ -1,9 +1,22 @@
 # Changelog
 
+## 1.5.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.4.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
 
+### Added
+- **Analysis Dashboard UI**: Three workflows for Flutter project analysis
+  - Workflow 1: Create new analysis from uploaded zip or Git import
+  - Workflow 2: View analysis results with filtering by severity/category/file path
+  - Workflow 3: Export analysis report (JSON/PDF)
+- **Frontend Components**: FindingCard with severity badges, expandable code snippets, recommendations
+- **API Integration**: Type-safe frontend client for all analysis endpoints
+- **Routing**: Analysis list at `/analysis`, detail view at `/analysis/:id`
+- **Tests**: FindingCard component tests (8 tests)
 ## 1.3.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.

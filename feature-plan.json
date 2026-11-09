@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_feature": "auth-oidc",
+  "current_feature": "analysis-dashboard",
   "features": [
     {
       "id": "project-skeleton",
@@ -94,12 +94,25 @@
     {
       "id": "analysis-dashboard",
       "title": "Analysis dashboard UI with three workflows",
-      "status": "planned",
+      "status": "in_progress",
       "acceptance": [
         "Workflow 1: Create new analysis from uploaded project",
         "Workflow 2: View analysis results with filtering/sorting",
         "Workflow 3: Export analysis report (JSON/PDF)",
         "Loading, error, and empty states for all views"
+      ],
+      "implementation": [
+        "frontend/src/types/analysis.ts",
+        "frontend/src/api/analysis.ts",
+        "frontend/src/components/FindingCard.tsx",
+        "frontend/src/pages/AnalysisList.tsx",
+        "frontend/src/pages/AnalysisDetail.tsx",
+        "frontend/src/App.tsx"
+      ],
+      "tests": [
+        "frontend/src/components/FindingCard.test.tsx",
+        "frontend/src/pages/AnalysisList.test.tsx",
+        "frontend/src/pages/AnalysisDetail.test.tsx"
       ]
     },
     {
