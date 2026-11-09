@@ -3,6 +3,8 @@ import { Layout } from "@/components/Layout";
 import { Dashboard } from "@/pages/Dashboard";
 import { Login } from "@/pages/Login";
 import { Callback } from "@/pages/Callback";
+import { AnalysisList } from "@/pages/AnalysisList";
+import { AnalysisDetail } from "@/pages/AnalysisDetail";
 
 function NotFound() {
   return (
@@ -23,7 +25,8 @@ export default function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/callback" element={<Callback />} />
-        <Route path="/analysis" element={<div className="text-center py-12 text-muted">Analysis Workflow - Coming Soon</div>} />
+        <Route path="/analysis" element={<AnalysisList />} />
+        <Route path="/analysis/:id" element={<AnalysisDetail />} />
         <Route path="/settings" element={<div className="text-center py-12 text-muted">Settings - Coming Soon</div>} />
         <Route path="*" element={<NotFound />} />
       </Route>

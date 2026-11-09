@@ -4,7 +4,7 @@ Each round completes one feature or repair. Future items are planned, not implem
 
 ## Current round
 
-auth-oidc
+analysis-dashboard
 
 ## Roadmap
 
@@ -50,13 +50,17 @@ Acceptance:
 
 ### analysis-dashboard — Analysis dashboard UI with three workflows
 
-Status: planned
+Status: in_progress
 
 Acceptance:
 - Workflow 1: Create new analysis from uploaded project
 - Workflow 2: View analysis results with filtering/sorting
 - Workflow 3: Export analysis report (JSON/PDF)
 - Loading, error, and empty states for all views
+
+Implementation: `frontend/src/types/analysis.ts`, `frontend/src/api/analysis.ts`, `frontend/src/components/FindingCard.tsx`, `frontend/src/pages/AnalysisList.tsx`, `frontend/src/pages/AnalysisDetail.tsx`, `frontend/src/App.tsx`
+
+Tests: `frontend/src/components/FindingCard.test.tsx`, `frontend/src/pages/AnalysisList.test.tsx`, `frontend/src/pages/AnalysisDetail.test.tsx`
 
 ### ci-cd-pipeline — CI/CD pipeline with GitHub Actions
 
