@@ -46,7 +46,7 @@ class GitImportRequest(BaseModel):
     """Request model for importing from git URL."""
 
     git_url: HttpUrl
-    branch: str = "main"
+    git_branch: str = "main"
     project_name: Optional[str] = None
 
 
