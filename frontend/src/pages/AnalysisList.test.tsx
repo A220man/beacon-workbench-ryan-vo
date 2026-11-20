@@ -1,8 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { AnalysisList } from "./AnalysisList";
 import { vi } from "vitest";
 
-// Mock the api/analysis module
 vi.mock("@/api/analysis", () => ({
   listAnalyses: vi.fn(() => Promise.resolve({ analyses: [], total: 0, limit: 20, offset: 0 })),
   deleteAnalysis: vi.fn(),
@@ -11,14 +10,13 @@ vi.mock("@/api/analysis", () => ({
 }));
 
 describe("AnalysisList", () => {
-  it("renders the analysis dashboard heading", () => {
+  it("renders the analysis dashboard heading", async () => {
     render(<AnalysisList />);
-    expect(screen.getByRole("heading", { name: /Analysis Dashboard/i })).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByRole("heading", { name: /Analysis Dashboard/i })).toBeInTheDocument());
   });
 
   it("shows empty state when no analyses", async () => {
-    (listAnalyses as jest.Mock).mockResolvedValueOnce({ analyses: [], total: 0, limit: 20, offset: 0 });
     render(<AnalysisList />);
-    expect(await screen.findByText(/No analyses yet/i)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(/No analyses yet/i)).toBeInTheDocument());
   });
 });
