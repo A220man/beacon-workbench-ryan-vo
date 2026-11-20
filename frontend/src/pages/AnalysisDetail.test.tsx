@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { AnalysisDetail } from "./AnalysisDetail";
 import { vi } from "vitest";
@@ -24,24 +24,21 @@ vi.mock("@/api/analysis", () => ({
 }));
 
 describe("AnalysisDetail", () => {
-  it("renders analysis details", async () =>ительная(
+  it("renders analysis details", async () => {
     render(
       <MemoryRouter initialEntries={["/analysis/analysis_1"]}>
         <AnalysisDetail />
       </MemoryRouter>
     );
-    expect(await screen.findByText("Test Project")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("Test Project")).toBeInTheDocument());
   });
 
   it("shows findings section when findings exist", async () => {
-    (getAnalysisFindings as jest.Mock).mockResolvedValueOnce([
-      { id: "f1", title: "State Reuse Issue", severity: "error" },
-    ]);
     render(
       <MemoryRouter initialEntries={["/analysis/analysis_1"]}>
         <AnalysisDetail />
       </MemoryRouter>
     );
-    expect(await screen.findByText("State reuse issue", { exact: false })).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText("State reuse issue", { exact: false })).toBeInTheDocument());
   });
 });
