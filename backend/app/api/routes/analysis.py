@@ -35,6 +35,8 @@ settings = get_settings()
 # In-memory storage for analyses (replace with DB in production)
 _analyses: dict[str, AnalysisReport] = {}
 
+MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10MB maximum file size
+
 
 class UploadProjectRequest(BaseModel):
     """Request model for uploading a Flutter project."""
@@ -70,6 +72,11 @@ async def upload_project(
     # Save uploaded file temporarily
     with tempfile.NamedTemporaryFile(delete=False, suffix=".zip") as tmp:
         content = await file.read()
+        if len(content) > MAX_UPLOAD_SIZE:
+            raise HTTPException(
+                status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                detail=f"File too large. Maximum size is {MAX_UPLOAD_SIZE // (1024 * 1024)}MB",
+            )
         tmp.write(content)
         tmp_path = tmp.name
 
